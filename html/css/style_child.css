@@ -1,0 +1,359 @@
+@charset"uft-8";
+
+/*基礎設定*/
+* {
+    background-color: transparent;
+    color: #000000;
+    margin: 0px;
+    padding: 0px;
+    border: none 0;
+    color: #000000;
+    font-family: "ＭＳ Ｐゴシック", sans-serif;
+    font-style: normal;
+    font-weight:normal;/*100~900*/
+    text-decoration: none;
+    text-align: left;
+    line-height: normal;/*文章のぎゅっと感*/
+    text-overflow:ellipsis;
+    }
+@font-face {
+  font-family:'myfont1';
+  src:local('../fonts/cormorant/cormorant/Cormorant-Light.ttf');
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color:#ffffff;
+  position:relative;
+}
+
+/*大域的グリッドコンテナ設定*/
+.grid {
+  display:grid;
+  grid-template-columns:[left] 1fr [main] 4fr [center]  4fr [main_end] 1fr [right];
+  grid-template-rows:[top] auto [head] auto [headimage] auto  [content1] auto [content2] auto [content3] auto [content4] auto [footer];
+  grid-gap:20px;
+}
+.headline1 {
+  grid-column-start:main;
+  grid-column-end:center;
+  grid-row-start:top;
+  grid-row-end:head;
+  display:inline-block;
+}
+.content1 {
+  grid-column-start:main;
+  grid-column-end:main_end;
+  grid-row-start:headimage;
+  grid-row-end: content1;
+}
+.content2 {
+  grid-column-start:main;
+  grid-column-end:main_end;
+  grid-row-start:content1;
+  grid-row-end:content2;
+}
+.content3 {
+  grid-column-start:main;
+  grid-column-end:main_end;
+  grid-row-start:content2;
+  grid-row-end:content3;
+}
+.content4 {
+  grid-column-start:left;
+  grid-column-end:right;
+  grid-row-start:content3;
+  grid-row-end:content4;
+  background-color:powderblue;
+}
+.left {
+  grid-column-start:main;
+  grid-column-end:center;
+  grid-row-start:headimage;
+  grid-row-end:content1;
+}
+
+.right {
+  grid-column-start:center;
+  grid-column-end:main_end;
+  grid-row-start:headimage;
+  grid-row-end:content1;
+}
+.flex {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+.flex * {
+  width:80vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lineflex {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+}
+.lineflex div {
+  width: 100%;
+}
+.lineflex img {
+  width:30%;
+}
+.lineflex img:hover {
+  background-color: lightblue;
+  transition:all 0.4s;
+}
+.flexa {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  align-content:space-around;
+}
+.flexa div {
+  width:100%;
+  height:20vh;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.flexa img {
+  height:20vh;
+  width:20vh;
+}
+
+
+.headline2 img {
+  width:10vh;
+  height:10vh;
+  margin-left: 5px;
+  margin-top:5px;
+}
+.headline2 {
+  grid-column-start:center;
+  grid-column-end:main_end;
+  grid-row-start:top;
+  grid-row-end:head;
+  display:flex;
+  justify-content: flex-end;
+}
+/*スマホ用*/
+@media all and (max-device-aspect-ratio: 1/1) {
+  * {
+    font-size: 20px;
+  }
+  #topastro {
+    font-size:200%;
+    font-family: "myfont",  sans-serif;
+    text-align: center;
+  }
+  .headimage {
+  grid-column-start:left;
+  grid-column-end:right;
+  grid-row-start:head;
+  grid-row-end:headimage;
+  }
+  .headimage img {
+    width:50%;
+    margin-left:25%;
+    margin-left:25%;
+  }
+
+  /*グローバルスティッキーメニュー*/
+  #navigation {
+    position:sticky;
+    top:0px;
+    background-color:transparent;
+    width:100vw;
+    height:0;
+    z-index: 10;
+  }
+  .bargercontainer {
+    position:absolute;
+    top:0;
+    right:0;
+    margin-right: 3vw;
+    margin-top:1vw;
+    width:40px;
+    height:40px;
+    cursor:pointer;
+    color:transparent;
+    z-index: 1;
+
+  }
+  .checkbox {
+    width:0;
+    height:0;
+    opacity:0;
+    cursor:pointer;
+  }
+  .custombarger {
+    width:100%;
+    height:10%;
+    position:absolute;
+    background-color:lightgray;
+    right:0;
+    transition:all 0.4s;
+    z-index: 1;
+  }
+  .custombarger:nth-of-type(1) {
+    top:17.5%;
+  }
+  .custombarger:nth-of-type(2) {
+    top:45%;
+  }
+  .custombarger:nth-of-type(3) {
+    top:72.5%;
+  }
+  .menucontents {
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    background-color:lightskyblue;
+    opacity:0.9;
+    top:0;
+    right:0;
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    transform:translate3d(0vh,-120vh,0px);
+    transition:all 0.4s;
+  }
+  .menucontents a {
+    height:10%;
+    width:70%;
+    color:white;
+    line-height: 1.3em;
+    text-align:center;
+    font-size: 150%;
+  }
+  .checkbox:checked ~ .bargercontainer span:nth-of-type(1) {
+    transform:scale(.8) rotate(315deg);
+    transition:all 0.4s;
+    top:45%;
+  }
+  .checkbox:checked ~ .bargercontainer span:nth-of-type(2) {
+    background-color:transparent;
+    width:80%;
+    height:80%;
+    padding:0;
+    top:0;
+    right:0;
+    border:lightgray solid 8%;
+  }
+  .checkbox:checked ~ .bargercontainer span:nth-of-type(3) {
+    transform:scale(.8) rotate(-315deg);
+    transition:all 0.4s;
+    top: 45%;
+  }
+  .checkbox:checked ~ .menucontents {
+  transform:translate3d(0vh,0vh,0px);
+  transition: all 0.4s;
+  }
+}
+/*パソコン用*/
+@media all and (min-device-aspect-ratio:1/1) {
+  * {
+    font-size:20px;
+  }
+  #topastro {
+    font-size: 250%;
+    font-family: myfont1, sans-serif;
+  }
+  .headimage {
+    grid-column-start:main;
+    grid-column-end:main_end;
+    grid-row-start:head;
+    grid-row-end:headimage;
+  }
+  .headimage img {
+    width:10%;
+    margin-left: 45%;
+    margin-right: 45%;
+  }
+
+
+
+  #navigation {
+    display:none;
+  }
+}
+
+/*下の方*/
+.footer {
+  grid-column-start:main;
+  grid-column-end:main_end;
+  grid-row-start:content4;
+  grid-row-end:footer;
+  background-color:white;
+  margin-bottom:10px;
+}
+.footer ul {
+  list-style: none;
+}
+.footer li {
+  display:inline-block;
+  border-right: solid gray 1px;
+  border-left: solid gray 1px;
+}
+.footer li:hover {
+  background-color:pink;
+  transition:all 0.2s;
+}
+.footer * {
+  width:auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align:center;
+}
+
+
+.readmore {
+  padding:10px;
+  width:200px;
+  border:skyblue solid;
+  text-align:center;
+  margin-top:30px;
+  margin-bottom: 30px;
+}
+.readmore:hover {
+  color:skyblue;
+  transition:all 0.5s;
+}
+.readmore:hover::after {
+  content:"        >";
+}
+
+.fontbold {
+  font-weight:bold;
+}
+.form * {
+  margin-top:5px;
+  margin-bottom:8px;
+}
+.someindent {
+  text-indent:1.5em;
+}
+.content1 dt {
+  background-color:lightcyan;
+}
+.topic {
+  text-align:center;
+  font-size:150%;
+  border-style:double;
+  border-color:skyblue;
+  border-width:0px 0px 2px 0px;
+  margin:10px 0px 10px 0px;
+}
+.topic2 {
+  font-size:130%;
+  border-style:double;
+  border-color:skyblue;
+  border-width:0px 0px 2px 0px;
+  margin:10px 0px 10px 0px;
+}
